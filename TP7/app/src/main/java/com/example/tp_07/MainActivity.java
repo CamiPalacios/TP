@@ -20,18 +20,24 @@ import com.google.gson.JsonParser;
 public class MainActivity extends AppCompatActivity {
 
     ListView UsuariosLista;
+    JsonArray listaObtenida;
     ArrayList<String> ArrayUsuarios;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UsuariosLista =findViewById(R.id.listaUsuarios);
+        UsuariosLista = findViewById(R.id.listaUsuarios);
+
+        tareaAsincronica tarea = new tareaAsincronica();
+        tarea.execute();
     }
-    /*private class tareaAsincronica extends AsyncTask<Void, Void, Void> {
+
+    private class tareaAsincronica extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... parametros) {
             try {
-                URL miRuta = new URL("https://jsonplaceholder.typicode.com/todos/" + );
+                URL miRuta = new URL("https://jsonplaceholder.typicode.com/users/");
                 Log.d("Conexion", "Me voy a conectar");
 
                 HttpURLConnection miConexion = (HttpURLConnection) miRuta.openConnection();
@@ -45,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
                     JsonParser ProcesadorDeJSon = new JsonParser();
                     JsonObject objetoJSon = ProcesadorDeJSon.parse(lectorJSon).getAsJsonObject();
 
-                    peliculas = objetoJSon.get("peliculas").getAsJsonArray();
-                    Log.d("Conexion", "El array tiene " + peliculas.size() + " elementos");
+                    listaObtenida = objetoJSon.get("users").getAsJsonArray();
+                    Log.d("Conexion", "El array tiene " + listaObtenida.size() + " elementos");
 
-                    for (int i = 0; i < peliculas.size(); i++) {
-                        JsonObject pelis = peliculas.get(i).getAsJsonObject();
+                    for (int i = 0; i < listaObtenida.size(); i++) {
+                        JsonObject pelis = listaObtenida.get(i).getAsJsonObject();
                         String nombre = pelis.get("nombre").getAsString();
-                        listaPeliculas.add(nombre);
+                        ArrayUsuarios.add(nombre);
                     }
                 } else {
                     Log.d("Conexion", "Error en la conexion");
@@ -61,5 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Conexion", "Ocurrio un error al procesar : " + Error.getMessage());
             }
             return null;
-        }*/
+        }
+    }
 }
