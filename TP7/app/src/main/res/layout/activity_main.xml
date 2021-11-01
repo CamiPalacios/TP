@@ -10,7 +10,7 @@
         android:textSize="40dp"
         android:textColor="@color/black"
         android:shadowColor="#E30052"
-        android:shadowRadius="2"
+        android:shadowRadius="5"
         android:shadowDx="3"
         android:shadowDy="4"/>
     <ListView
